@@ -15,7 +15,7 @@ fn main() {
         for ch in hand.chars().collect::<Vec<char>>() {
             *hand_counts.entry(ch).or_insert(0) += 1;
         }
-        let joks = hand_counts.get(&'J').unwrap_or(&0);
+        let joks = *hand_counts.get(&'J').unwrap_or(&0);
         hand_counts.remove(&'J');
         let mut hand_sorted: Vec<_> = hand_counts.iter().collect();
         hand_sorted.sort_by(|a, b| b.1.cmp(a.1));
@@ -38,7 +38,6 @@ fn main() {
         }
         let label_ranks: Vec<_> = hand.chars().map(|c| labels.len() - labels.find(c).unwrap()).collect();
         hands.push((rank, label_ranks, hand.to_string(), bid));
-        println!("{:?}", hands.last().unwrap());
     }
     hands.sort_by(|a, b| a.cmp(b));
     let mut win = 0;
