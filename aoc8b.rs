@@ -74,7 +74,7 @@ fn main() {
         map.insert(src.to_string(), dest[1..dest.len()-1].split(", ").map(String::from).collect::<Vec<_>>());
     }
     let dirs = "LR";
-    let mut ghosts = map.keys().filter(|k| k.ends_with('A')).map(|p| (p, Vec::<&str>::new(), 0, "", 0)).collect::<Vec<_>>();
+    let mut ghosts = map.keys().filter(|k| k.ends_with('A')).map(|p| (p, 0, "", 0)).collect::<Vec<_>>();
     let mut count = 0;
     for dir in route.chars().cycle() {
         count += 1;
@@ -83,12 +83,12 @@ fn main() {
             let next = &map[ghost.0][idx];
             ghost.0 = next;
             if next.ends_with("Z") {
-                if ghost.4 == 0 && next == ghost.3 {
-                    ghost.4 = count
+                if ghost.3 == 0 && next == ghost.2 {
+                    ghost.3 = count
                 }
-                if ghost.2 == 0 {
-                    ghost.2 = count;
-                    ghost.3 = next;
+                if ghost.1 == 0 {
+                    ghost.1 = count;
+                    ghost.2 = next;
                 } 
             }
         }
@@ -96,8 +96,8 @@ fn main() {
             // Happens ever?
             break;
         }
-        if ghosts.iter().filter(|g| g.2 > 0 && g.4 > 0).count() == ghosts.len() {
-            let cycles = ghosts.iter().map(|g| (g.2, g.4 - g.2)).collect::<Vec<_>>();
+        if ghosts.iter().filter(|g| g.1 > 0 && g.3 > 0).count() == ghosts.len() {
+            let cycles = ghosts.iter().map(|g| (g.1, g.3 - g.1)).collect::<Vec<_>>();
             let merged = cycles.iter().fold((1, 1), |acc, nxt| merge_ghosts(acc.0, acc.1, nxt.0, nxt.1));
             // This simpler way also works for the input, as there are no misaligned cycles.
             // The real code should also work for misaligned cycles.
