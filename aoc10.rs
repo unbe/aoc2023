@@ -73,7 +73,7 @@ fn main() {
 
     // Guess the 'S' pipe.
     let s_dirs = (start[0] - s_pos, start[1] - s_pos);
-    let s_pipe = pipe_dirs.iter().filter(|(_k, &v)| s_dirs == v || s_dirs == (v.1, v.0)).map(|(k, _v)| k).collect::<Vec<_>>()[0];
+    let s_pipe = pipe_dirs.iter().filter(|(_k, &v)| s_dirs == v || s_dirs == (v.1, v.0)).map(|(k, _v)| k).next().unwrap();
 
     let mut inside_count = 0;
     let mut outside = true;
@@ -120,7 +120,8 @@ fn main() {
                 _ => panic!("what?")
             }
         } else {
-            if !edge && !outside {
+            assert!(!edge);
+            if !outside {
                 inside_count += 1
             }
         }
