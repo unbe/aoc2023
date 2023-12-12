@@ -25,8 +25,7 @@ def solve(rec, grp):
 
 total = 0
 for r in recs:
-    s = solve(*r)
-    total += s
+    total += solve(*r)
 print("part1:", total)
 
 def unfold(t, s):
@@ -35,12 +34,9 @@ def unfold(t, s):
         t = t[:-len(s)]
     return tuple(t)
 
-recs2 = []
-for r in recs:
-    recs2.append((unfold(r[0], ['?']), unfold(r[1], [])))
+recs2 = [(unfold(rec, ['?']), unfold(grp, [])) for (rec, grp) in recs]
     
 total = 0
 for r in recs2:
-    s = solve(*r)
-    total += s
+    total += solve(*r)
 print("part2:", total)
