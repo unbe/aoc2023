@@ -16,11 +16,11 @@ def solve(rec, grp):
     if len(grp) > 0 and len(rec) > 0:
         g = grp[0]
         for i in range(len(rec)-g+1):
-            prefits = sum(x != '#' for x in rec[:i]) == i
             fits = sum(x != '.' for x in rec[i:i+g]) == g
-            if prefits and fits and (i+g == len(rec) or rec[i+g] != '#'):
+            if fits and (i+g == len(rec) or rec[i+g] != '#'):
                 cnt += solve(rec[i+g+1:], grp[1:])
-
+            if rec[i] == '#':
+                break
     return cnt
 
 total = 0
