@@ -2,15 +2,15 @@ import sys
 maze = [line.strip() for line in sys.stdin]
 def count(beam):
     beams = [beam]
-    e = set()
+    seen = set()
     while len(beams) > 0:
         b = beams.pop()
         b = (b[0] + b[2], b[1] + b[3], b[2], b[3])
         if b[0] < 0 or b[0] >= len(maze) or b[1] < 0 or b[1] >= len(maze[0]):
             continue
-        if b in e:
+        if b in seen:
             continue
-        e.add(b)
+        seen.add(b)
         obj = maze[b[0]][b[1]]
         if obj == '/':
             beams.append((b[0], b[1], -b[3], -b[2]))
@@ -21,7 +21,7 @@ def count(beam):
             beams.append((b[0], b[1], b[3], b[2]))
         else:
             beams.append(b)
-    return len(set([(x[0], x[1]) for x in e]))
+    return len(set([(b[0], b[1]) for b in seen]))
 
 print('part1:', count((0, -1, 0, 1)))
 
