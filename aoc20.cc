@@ -54,7 +54,9 @@ int main() {
             if (name == "output") {
                 continue;
             }
-            if (name == "rx" || name == "hh" || name == "fn" || name == "fh" || name == "lk") {
+            // part2 solved via input analysis for now. Need to think how a generic solution 
+            // would look like.
+            if (name == "rx" || name == "fn"  || name == "hh" || name == "fh" || name == "lk") {
                 if (!pulse.high) {
                     std::cout << "part2: " << name << ": " << (i + 1) << std::endl;
                 }
@@ -95,6 +97,8 @@ int main() {
                 }
             }
         }
+        if (i == 999) {
+            std::cout << "part1: " << static_cast<uint64_t>(highcnt)*lowcnt << std::endl;
+        }
     }
-    std::cout << "part1: " << static_cast<uint64_t>(highcnt)*lowcnt << std::endl;
 };
