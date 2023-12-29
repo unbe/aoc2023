@@ -2,6 +2,7 @@ package aoc2023;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -42,6 +43,10 @@ public class aoc21 {
 		}
 	}
 
+	public static int mod(int a, int m) {
+		return (a % m + m) % m;
+	}
+
 	public static void main(String[] args) {
 		Stream<String> lines = new BufferedReader(new InputStreamReader(System.in)).lines();
 		List<String> maze = lines.collect(Collectors.toList());
@@ -56,23 +61,39 @@ public class aoc21 {
 		Set<Point> front = new HashSet<>();
 		front.add(new Point(sr, sc));
 		Set<Point> step = new HashSet<>();
-		for (int i = 0; i < 64; i++) {
+		int p1_target = 64;
+		int p2_target = 26501365;
+		List<Integer> poly = new ArrayList<Integer>();
+		for (int i = 0;; i++) {
 			for (Point p : front) {
 				for (Point d : dirs) {
 					Point n = new Point(p.r + d.r, p.c + d.c);
-					if (n.r >= 0 && n.r < maze.size()) {
-						String row = maze.get(n.r);
-						if (n.c >= 0 && n.c < row.length()) {
-							if (row.charAt(n.c) != '#') {
-								step.add(n);
-							}
-						}
+					String row = maze.get(mod(n.r, maze.size()));
+					if (row.charAt(mod(n.c, row.length())) != '#') {
+						step.add(n);
 					}
 				}
 			}
 			front = step;
 			step = new HashSet<>();
+			int steps = i + 1;
+			if (steps == p1_target) {
+				System.out.println("part1: " + front.size());
+			}
+			if (steps % maze.size() == p2_target % maze.size()) {
+				poly.add(front.size());
+				if (poly.size() == 3) {
+					break;
+				}
+			}
 		}
-		System.out.println("part1: " + front.size());
+		int p1 = poly.get(0);
+		int p2 = poly.get(1);
+		int p3 = poly.get(2);
+		long a = (p3 - (2 * p2) + p1) / 2;
+		long b = p2 - p1 - a;
+		long c = p1;
+		long n = (p2_target - maze.size() / 2) / maze.size();
+		System.out.println("part2: " + ((a * (n * n)) + (b * n) + c));
 	}
 }
