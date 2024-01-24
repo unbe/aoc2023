@@ -82,13 +82,16 @@ dx1, dy1, dz1 = lines[1][1]
 px2, py2, pz2 = lines[2][0]
 dx2, dy2, dz2 = lines[2][1]
 
+px3, py3, pz3 = lines[3][0]
+dx3, dy3, dz3 = lines[3][1]
+
 a = np.array([
-  (dy1 - dy0) , (dx0 - dx1) , 0           , (py0 - py1) , (px1 - px0) , 0,
-  0           , (dz1 - dz0) , (dy0 - dy1) , 0           , (pz0 - pz1) , (py1 - py0),
-  (dy2 - dy0) , (dx0 - dx2) , 0           , (py0 - py2) , (px2 - px0) , 0,
-  0           , (dz2 - dz0) , (dy0 - dy2) , 0           , (pz0 - pz2) , (py2 - py0),
-  (dy3 - dy0) , (dx0 - dx3) , 0           , (py0 - py3) , (px3 - px0) , 0,
-  0           , (dz3 - dz0) , (dy0 - dy3) , 0           , (pz0 - pz3) , (py3 - py0)
+  [(dy1 - dy0), (dx0 - dx1), 0          , (py0 - py1), (px1 - px0), 0],
+  [0          , (dz1 - dz0), (dy0 - dy1), 0          , (pz0 - pz1), (py1 - py0)],
+  [(dy2 - dy0), (dx0 - dx2), 0          , (py0 - py2), (px2 - px0), 0],
+  [0          , (dz2 - dz0), (dy0 - dy2), 0          , (pz0 - pz2), (py2 - py0)],
+  [(dy3 - dy0), (dx0 - dx3), 0          , (py0 - py3), (px3 - px0), 0],
+  [0          , (dz3 - dz0), (dy0 - dy3), 0          , (pz0 - pz3), (py3 - py0)]
 ])
 
 b = np.array([
@@ -97,7 +100,8 @@ b = np.array([
   py0 * dx0 + px2*dy2 - px0*dy0  - py2*dx2,
   pz0 * dy0 + py2*dz2 - py0*dz0  - pz2*dy2,
   py0 * dx0 + px3*dy3 - px0*dy0  - py3*dx3,
-  pz0 * dy0 + py3*dz3 - py0*dz0  - pz3*dy3]
-)
+  pz0 * dy0 + py3*dz3 - py0*dz0  - pz3*dy3
+])
 
 r = np.linalg.solve(a, b)
+print('part2:', int(np.round(r[:3].sum())))
