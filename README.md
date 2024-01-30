@@ -6,7 +6,7 @@ Index:
 
  * Shell: [Day1](aoc01.sh)
  * Golang: [Day2](aoc02.go) [Day3](aoc03.go)
- * Python: [Day4](aoc04.py) [Day5](aoc05.py) [Day11](aoc11.py) [Day12](aoc12.py) [Day13](aoc13.py) [Day16](aoc16.py) [Day17](aoc17.py)
+ * Python: [Day4](aoc04.py) [Day5](aoc05.py) [Day11](aoc11.py) [Day12](aoc12.py) [Day13](aoc13.py) [Day16](aoc16.py) [Day17](aoc17.py) [Day24](aoc24.py) [Day25](aoc25.py)
  * Rust: [Day6](aoc06.rs) [Day7](aoc07.rs) [part2](aoc07b.rs) [Day8](aoc08.rs) [part2](aoc08b.rs) [Day9](aoc09.rs) [Day10](aoc10.rs)
  * Typescript: [Day14](aoc14.ts) [Day15](aoc15.ts) (for JavaScript look here)
  * C++: [Day18](aoc18.cc) [Day19](aoc19.cc) [Day20](aoc20.cc)
