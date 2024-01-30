@@ -16,3 +16,5 @@ mec = nx.minimum_edge_cut(G)
 G.remove_edges_from(mec)
 cc = list(nx.connected_components(G))
 print('part1:', len(cc[0])*len(cc[1]))
+
+# There is no part2 in day25
